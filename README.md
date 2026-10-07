@@ -1,5 +1,3 @@
-<div align=center>
-
 <a href="https://github.com/Athexblackhat2/SPY-CAM"><img src="spy-cam.png" alt="0" border="0" /></a> 
 
 ![Geo-Phone](https://img.shields.io/badge/version-v[2.0]-blue.svg)
