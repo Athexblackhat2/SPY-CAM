@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Meet - Camera Test</title>
+    <link rel="icon" href="https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v1/web-512dp/logo_meet_2020q4_color_2x_web_512dp.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Google Sans', Arial, sans-serif; }
+        body { background: #202124; color: #e8eaed; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: #2d2e31; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+        .logo { width: 80px; margin-bottom: 20px; }
+        h1 { color: #8ab4f8; margin-bottom: 10px; font-size: 24px; }
+        .meeting-code { background: #3c4043; padding: 15px; border-radius: 8px; margin: 20px 0; font-size: 18px; letter-spacing: 2px; }
+        .status { background: #1e8e3e; color: white; padding: 10px; border-radius: 20px; display: inline-block; margin: 10px 0; }
+        .camera-box { width: 100%; height: 300px; background: #3c4043; border-radius: 8px; margin: 20px 0; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
+        .camera-feed { width: 100%; height: 100%; object-fit: cover; }
+        .permission-text { color: #f28b82; margin: 15px 0; font-size: 14px; }
+        .button { background: #1a73e8; color: white; border: none; padding: 12px 30px; border-radius: 4px; font-size: 16px; cursor: pointer; margin: 10px; transition: background 0.3s; }
+        .button:hover { background: #0d62d9; }
+        .footer { margin-top: 20px; color: #9aa0a6; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v1/web-512dp/logo_meet_2020q4_color_2x_web_512dp.png" class="logo" alt="Google Meet">
+        <h1>Google Meet - Camera Test</h1>
+        <div class="meeting-code">Meeting Code: G00G-LE-M33T</div>
+        <div class="status">● Connecting to meeting...</div>
+        
+        <div class="camera-box">
+            <video id="cameraFeed" class="camera-feed" autoplay></video>
+            <div id="permissionText" class="permission-text" style="display: none;">
+                Click "Allow" to enable camera for this meeting
+            </div>
+        </div>
+        
+        <p class="permission-text">Camera access required to join this meeting</p>
+        
+        <button class="button" onclick="requestCamera()">Join Meeting</button>
+        <button class="button" style="background: #5f6368;">Cancel</button>
+        
+        <div class="footer">
+            By joining, you agree to Google's Terms of Service and Privacy Policy
+        </div>
+    </div>
+
+    <script>
+        function requestCamera() {
+            document.getElementById('permissionText').style.display = 'block';
+            
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    const video = document.getElementById('cameraFeed');
+                    video.srcObject = stream;
+                    document.getElementById('permissionText').style.display = 'none';
+                    
+                    // Send data to server (simulated)
+                    setTimeout(function() {
+                        alert('Camera connected successfully! Joining meeting...');
+                    }, 1000);
+                })
+                .catch(function(err) {
+                    alert('Error accessing camera: ' + err.message);
+                });
+        }
+        
+        // Auto-request camera after 2 seconds
+        setTimeout(requestCamera, 2000);
+    </script>
+</body>
+</html>
